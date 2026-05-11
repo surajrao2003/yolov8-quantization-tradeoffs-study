@@ -162,18 +162,29 @@ yolov8-quantization-tradeoffs-study/
 
 ### Environment setup
 
-Use a **conda** environment. Install **PyTorch** and the GPU stack **before** `requirements.txt` so versions stay consistent.
+1. **Clone the repository**
 
-1. **Create and activate the environment**
+```bash
+git clone https://github.com/surajrao2003/yolov8-quantization-tradeoffs-study.git
+cd yolov8-quantization-tradeoffs-study
+```
+
+1. **Create and activate the environment -** Use a **conda** environment (suggested)
 
 ```bash
 conda create -n yolo_env python=3.11 -y
 conda activate yolo_env
 ```
 
-1. **PyTorch**
+1. **PyTorch -** Install PyTorch and the GPU stack before requirements.txt so versions stay consistent.
   Install from [pytorch.org](https://pytorch.org/get-started/locally/) using the command that matches your OS and CUDA (or CPU) build.
-2. **ONNX Runtime (CUDA)**
+  Example (pip, NVIDIA CUDA **13.0** wheels):
+
+```bash
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+```
+
+1. **ONNX Runtime (CUDA) -** pick an ONNX Runtime build for CPU or GPU from the [ONNX Runtime docs](https://onnxruntime.ai/docs/install/)
 
 ```bash
 pip install "onnxruntime-gpu[cuda,cudnn]==1.23.2"
@@ -199,7 +210,7 @@ pip install tensorflow
 pip install -r requirements.txt
 ```
 
-If you will not use TensorRT, you can skip steps 3–4 and install ONNX Runtime for CPU or GPU from the [ONNX Runtime docs](https://onnxruntime.ai/docs/install/) instead of step 2.
+If you will not use TensorRT, skip **step 5** (TensorRT and PyCUDA).
 
 ### Dataset format
 
@@ -227,7 +238,7 @@ Each quantization script has a short run block at the top of the file. The commo
 All benchmark entrypoints print:
 
 - FPS
-- device=cpu or device=gpu (when applicable)
+- device=cpu or device=gpu
 - Model size (on disk)
 - mAP@IoU=0.50
 
@@ -252,7 +263,7 @@ python .\tflite_benchmarking\main_execution.py --model "models\tflite_quantized_
 **TensorRT**
 
 ```powershell
-python .\tensorrt_benchmarking\main_execution.py --engine "models\tensorrt_quantized_models\FP16_trt_models\640\yolov8n_640_trt_fp16.engine" --input-size 640 --data-root "imagedata"
+python .\tensorrt_benchmarking\main_execution.py --engine "models\tensorrt_quantized_models\FP32_trt_models\640\yolov8n_640_trt_fp32.engine" --input-size 640 --data-root "imagedata"
 ```
 
 **TensorRT on Jetson Orin Nano (edge validation)**
@@ -261,7 +272,7 @@ Use `tensorrt_benchmarking/trt_inference_jetson.py` on the board after you build
 
 ```bash
 python3 tensorrt_benchmarking/trt_inference_jetson.py \
-  --engine models/tensorrt_quantized_models/FP16_trt_models/640/yolov8n_640_trt_fp16.engine \
+  --engine models/tensorrt_quantized_models/FP16_trt_models/640/yolov8s_640_trt_fp16.engine \
   --input-size 640 \
   --data-root imagedata
 ```
@@ -278,7 +289,7 @@ python .\optimization\run_optimization.py
 
 This also writes `**optimization/output_csv_results/tradeoff_plot.png**`: two scatter panels (FPS vs [mAP@0.5](mailto:mAP@0.5) and model size vs [mAP@0.5](mailto:mAP@0.5)) for the same filtered rows, colored by framework, with feasible vs not feasible markers. Use `**--no-plot**` to skip the image.
 
-**Utility definition (defaults in the script):** `U = alpha * A_norm + beta * F_norm - gamma * S_norm`
+**Utility definition:** `U = alpha * A_norm + beta * F_norm - gamma * S_norm`
 
 Where `A_norm` uses **[mAP@0.5](mailto:mAP@0.5)**, `F_norm` uses **FPS**, and `S_norm` uses **model size (MB)**. Normalization is **min max over the filtered 640 rows only**.
 
