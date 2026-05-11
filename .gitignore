@@ -1,0 +1,163 @@
+# --- Python / env ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+.env.*
+
+# --- Packaging / tooling ---
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# --- OS / IDE ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# --- Ultralytics / TF / local experiment outputs ---
+runs/
+wandb/
+
+# --- Generated inference overlays (recreated each run) ---
+outputfolder/
+outputfolder_trt_jetson/
+
+# --- Caches (tools, frameworks, downloads; do not commit) ---
+.cache/
+**/.cache/
+*.cache
+**/*.cache
+*.timing_cache
+**/*.timing_cache
+.ipynb_checkpoints/
+.matplotlib/
+.huggingface/
+torch_hub/
+.torch/
+*.pt.trace
+.joblib/
+.tox/
+.nox/
+.dmypy.json
+.dmypy/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.sass-cache/
+
+# --- Intermediate build artifacts (not model checkpoints) ---
+**/*_preprocessed.onnx
+
+# =============================================================================
+# Models: ignore bulk artifacts. Tracked defaults = YOLOv8n @ 640 per technique
+# (regenerate yolov8s/m and 320/1280 with quantization_scripts). To version
+# another file, add a matching `!path/to/file` after the block for that folder.
+# =============================================================================
+
+# --- Base PyTorch weights (Ultralytics .pt): one checkpoint ---
+models/yolo_models/*
+!models/yolo_models/yolov8n.pt
+
+# --- ONNX: one file per precision family @ 640 (YOLOv8n) ---
+models/onnx_quantized_models/**
+!models/onnx_quantized_models/FP32_onnx_models/
+models/onnx_quantized_models/FP32_onnx_models/**
+!models/onnx_quantized_models/FP32_onnx_models/640/
+models/onnx_quantized_models/FP32_onnx_models/640/**
+!models/onnx_quantized_models/FP32_onnx_models/640/yolov8n_640.onnx
+
+!models/onnx_quantized_models/FP16_onnx_models/
+models/onnx_quantized_models/FP16_onnx_models/**
+!models/onnx_quantized_models/FP16_onnx_models/640/
+models/onnx_quantized_models/FP16_onnx_models/640/**
+!models/onnx_quantized_models/FP16_onnx_models/640/yolov8n_640_fp16.onnx
+
+!models/onnx_quantized_models/INT8_onnx_dynamic_quantized_models/
+models/onnx_quantized_models/INT8_onnx_dynamic_quantized_models/**
+!models/onnx_quantized_models/INT8_onnx_dynamic_quantized_models/640/
+models/onnx_quantized_models/INT8_onnx_dynamic_quantized_models/640/**
+!models/onnx_quantized_models/INT8_onnx_dynamic_quantized_models/640/yolov8n_640_dynamic_quantized.onnx
+
+!models/onnx_quantized_models/INT8_onnx_static_quantized_models/
+models/onnx_quantized_models/INT8_onnx_static_quantized_models/**
+!models/onnx_quantized_models/INT8_onnx_static_quantized_models/640/
+models/onnx_quantized_models/INT8_onnx_static_quantized_models/640/**
+!models/onnx_quantized_models/INT8_onnx_static_quantized_models/640/yolov8n_640_static_quantized.onnx
+
+# --- PyTorch quantized checkpoints: one per category @ 640 ---
+models/pytorch_quantized_models/**
+!models/pytorch_quantized_models/FP16_pytorch_models/
+models/pytorch_quantized_models/FP16_pytorch_models/**
+!models/pytorch_quantized_models/FP16_pytorch_models/640/
+models/pytorch_quantized_models/FP16_pytorch_models/640/**
+!models/pytorch_quantized_models/FP16_pytorch_models/640/yolov8n_640_fp16.pt
+
+!models/pytorch_quantized_models/INT8_pytorch_dynamic_quantized_models/
+models/pytorch_quantized_models/INT8_pytorch_dynamic_quantized_models/**
+!models/pytorch_quantized_models/INT8_pytorch_dynamic_quantized_models/640/
+models/pytorch_quantized_models/INT8_pytorch_dynamic_quantized_models/640/**
+!models/pytorch_quantized_models/INT8_pytorch_dynamic_quantized_models/640/yolov8n_640_pytorch_dynamic_quantized.pt
+
+!models/pytorch_quantized_models/INT8_pytorch_static_quantized_models/
+models/pytorch_quantized_models/INT8_pytorch_static_quantized_models/**
+!models/pytorch_quantized_models/INT8_pytorch_static_quantized_models/640/
+models/pytorch_quantized_models/INT8_pytorch_static_quantized_models/640/**
+!models/pytorch_quantized_models/INT8_pytorch_static_quantized_models/640/yolov8n_640_pytorch_static_quantized.pt
+
+# --- TFLite: one per quantization type @ 640 ---
+models/tflite_quantized_models/**
+!models/tflite_quantized_models/FP32_tflite_models/
+models/tflite_quantized_models/FP32_tflite_models/**
+!models/tflite_quantized_models/FP32_tflite_models/640/
+models/tflite_quantized_models/FP32_tflite_models/640/**
+!models/tflite_quantized_models/FP32_tflite_models/640/yolov8n_640_fp32.tflite
+
+!models/tflite_quantized_models/FP16_tflite_models/
+models/tflite_quantized_models/FP16_tflite_models/**
+!models/tflite_quantized_models/FP16_tflite_models/640/
+models/tflite_quantized_models/FP16_tflite_models/640/**
+!models/tflite_quantized_models/FP16_tflite_models/640/yolov8n_640_fp16.tflite
+
+!models/tflite_quantized_models/dynamic_range_tflite_models/
+models/tflite_quantized_models/dynamic_range_tflite_models/**
+!models/tflite_quantized_models/dynamic_range_tflite_models/640/
+models/tflite_quantized_models/dynamic_range_tflite_models/640/**
+!models/tflite_quantized_models/dynamic_range_tflite_models/640/yolov8n_640_dynamic_range.tflite
+
+!models/tflite_quantized_models/full_integer_INT8_tflite_models/
+models/tflite_quantized_models/full_integer_INT8_tflite_models/**
+!models/tflite_quantized_models/full_integer_INT8_tflite_models/640/
+models/tflite_quantized_models/full_integer_INT8_tflite_models/640/**
+!models/tflite_quantized_models/full_integer_INT8_tflite_models/640/yolov8n_640_int8_full_integer.tflite
+
+# --- TensorRT engines: one per precision @ 640 (from yolov8n_640 ONNX stems) ---
+models/tensorrt_quantized_models/**
+!models/tensorrt_quantized_models/FP32_trt_models/
+models/tensorrt_quantized_models/FP32_trt_models/**
+!models/tensorrt_quantized_models/FP32_trt_models/640/
+models/tensorrt_quantized_models/FP32_trt_models/640/**
+!models/tensorrt_quantized_models/FP32_trt_models/640/yolov8n_640_trt_fp32.engine
+
+!models/tensorrt_quantized_models/FP16_trt_models/
+models/tensorrt_quantized_models/FP16_trt_models/**
+!models/tensorrt_quantized_models/FP16_trt_models/640/
+models/tensorrt_quantized_models/FP16_trt_models/640/**
+!models/tensorrt_quantized_models/FP16_trt_models/640/yolov8n_640_trt_fp16.engine
+
+!models/tensorrt_quantized_models/INT8_trt_models/
+models/tensorrt_quantized_models/INT8_trt_models/**
+!models/tensorrt_quantized_models/INT8_trt_models/640/
+models/tensorrt_quantized_models/INT8_trt_models/640/**
+!models/tensorrt_quantized_models/INT8_trt_models/640/yolov8n_640_trt_int8.engine
