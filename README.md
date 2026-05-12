@@ -98,6 +98,7 @@ We report:
 | `models/tensorrt_quantized_models/` | TensorRT engines grouped by precision and input size                                                                                                                               |
 | `imagedata/`                        | Example dataset folder with `images/` and `labels/`                                                                                                                                |
 | `outputfolder/`                     | Default annotated output folder recreated on each run                                                                                                                              |
+| `benchmarking_snapshots.pdf`        | PDF of terminal screenshots from benchmark runs (reference only; for proofs)                                                                                                       |
 
 
 ### Project structure
@@ -156,6 +157,7 @@ yolov8-quantization-tradeoffs-study/
 │   └── config_custom_data.yaml                 
 ├── imagedata/                                   # example: images/ + labels/
 ├── outputfolder/                                # inference outputs (created/overwritten on run)
+├── benchmarking_snapshots.pdf                   # terminal screenshots of benchmark results (reference/proof)
 ├── requirements.txt
 └── README.md
 ```
@@ -305,6 +307,7 @@ Override weights and cuts with CLI flags such as `--alpha`, `--beta`, `--gamma`,
 
 ### Notes
 
+- `benchmarking_snapshots.pdf` contains terminal screenshots from benchmark runs (for documentation and proofs only).
 - `optimization/benchmark_results.csv` is a fixed table of results copied in from completed benchmark runs. It is not written or updated by the benchmarking scripts.
 - `outputfolder/` is recreated on each run when it is used as the default output location.
 - **TensorRT:** A TensorRT `.engine` file is optimized for the exact GPU it was built on. So, if you build it on **GPU1** and run it on **GPU2**, TensorRT may produce wrong results, crash, hang, or run slower. Rebuild the `.engine` separately on each GPU/machine.
