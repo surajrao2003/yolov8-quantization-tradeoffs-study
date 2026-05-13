@@ -173,14 +173,14 @@ git clone https://github.com/surajrao2003/yolov8-quantization-tradeoffs-study.gi
 cd yolov8-quantization-tradeoffs-study
 ```
 
-1. **Create and activate the environment** (conda recommended)
+2. **Create and activate the environment** (conda recommended)
 
 ```bash
 conda create -n yolo_env python=3.11 -y
 conda activate yolo_env
 ```
 
-1. **PyTorch**
+3. **PyTorch**
   Install from [pytorch.org](https://pytorch.org/get-started/locally/) using the command that matches your OS and CUDA (or CPU) build.
    Example (pip, NVIDIA CUDA **13.0** wheels):
 
@@ -188,13 +188,13 @@ conda activate yolo_env
 pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
 ```
 
-1. **ONNX Runtime (CUDA)**
+4. **ONNX Runtime (CUDA)**
 
 ```bash
 pip install "onnxruntime-gpu[cuda,cudnn]==1.23.2"
 ```
 
-1. **TensorRT and PyCUDA (conda)**
+5. **TensorRT and PyCUDA (conda)**
   These conda installs are **required** for the TensorRT build and benchmark scripts to work reliably with the rest of the stack.
 
 ```bash
@@ -202,13 +202,13 @@ conda install tensorrt=10.16.1.11
 conda install -c conda-forge "pycuda=2025.1.2"
 ```
 
-1. **TensorFlow** (TFLite export and benchmarking)
+6. **TensorFlow** (TFLite export and benchmarking)
 
 ```bash
 pip install tensorflow
 ```
 
-1. **Remaining Python packages**
+7. **Remaining Python packages**
 
 ```bash
 pip install -r requirements.txt
