@@ -164,6 +164,8 @@ yolov8-quantization-tradeoffs-study/
 
 ### Environment setup
 
+Use a **conda** environment. Install **PyTorch** and the GPU stack **before** `requirements.txt` so versions stay consistent.
+
 1. **Clone the repository**
 
 ```bash
@@ -171,22 +173,22 @@ git clone https://github.com/surajrao2003/yolov8-quantization-tradeoffs-study.gi
 cd yolov8-quantization-tradeoffs-study
 ```
 
-1. **Create and activate the environment -** Use a **conda** environment (suggested)
+1. **Create and activate the environment** (conda recommended)
 
 ```bash
 conda create -n yolo_env python=3.11 -y
 conda activate yolo_env
 ```
 
-1. **PyTorch -** Install PyTorch and the GPU stack before requirements.txt so versions stay consistent.
+1. **PyTorch**
   Install from [pytorch.org](https://pytorch.org/get-started/locally/) using the command that matches your OS and CUDA (or CPU) build.
-  Example (pip, NVIDIA CUDA **13.0** wheels):
+   Example (pip, NVIDIA CUDA **13.0** wheels):
 
 ```bash
 pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
 ```
 
-1. **ONNX Runtime (CUDA) -** pick an ONNX Runtime build for CPU or GPU from the [ONNX Runtime docs](https://onnxruntime.ai/docs/install/)
+1. **ONNX Runtime (CUDA)**
 
 ```bash
 pip install "onnxruntime-gpu[cuda,cudnn]==1.23.2"
@@ -212,7 +214,7 @@ pip install tensorflow
 pip install -r requirements.txt
 ```
 
-If you will not use TensorRT, skip **step 5** (TensorRT and PyCUDA).
+If you will not use TensorRT, skip **step 5** (TensorRT and PyCUDA) and pick an ONNX Runtime build for CPU or GPU from the [ONNX Runtime docs](https://onnxruntime.ai/docs/install/) instead of the pip line in **step 4** when that fits your machine.
 
 ### Dataset format
 

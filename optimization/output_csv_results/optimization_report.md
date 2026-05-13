@@ -72,3 +72,6 @@ Override weights and cuts with `--alpha`, `--beta`, `--gamma`, `--amin`, `--lmax
 
 ## Full table
 See `full_results_with_utility.csv` in this folder for every filtered row with `A_norm`, `F_norm`, `S_norm`, `utility`, and `feasible`.
+
+## Tradeoff figure
+Scatter summary: **`tradeoff_plot.png`** — FPS vs mAP@0.5 and model size vs mAP@0.5 (markers by framework; circle = feasible under current cuts, x = not; dashed line is `--amin`).
